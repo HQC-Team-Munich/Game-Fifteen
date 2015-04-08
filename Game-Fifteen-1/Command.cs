@@ -1,26 +1,33 @@
-﻿namespace GameFifteen
+﻿using GameFifteen.Enumerations;
+
+namespace GameFifteen
 {
     using System;
 
-    static class Command
+    public static class Command
     {
-        public static string CommandType(string input)
+        public static State CommandType(string input)
         {
             input = input.ToLower();
-            string output;
+            State result;
 
             switch (input)
             {
                 case "restart":
+                    result = State.Restart;
+                    break;
                 case "exit":
+                    result = State.Exit;
+                    break;
                 case "top":
-                    output = input;
+                    result = State.Top;
                     break;
                 default:
                     throw new ArgumentException("Invalid Command!");
+                    break;
             }
 
-            return output;
+            return result;
         }
     }
 }

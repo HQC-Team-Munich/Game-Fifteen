@@ -1,8 +1,9 @@
 ﻿namespace GameFifteen.Enumerations
 {
-    public enum Commands
+    public enum State
     {
         Restart,
+        InGame,
         Top,
         Exit
     }

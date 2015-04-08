@@ -11,43 +11,44 @@
         {
             var tiles = new List<Tile>();
             var moves = 0;
-            var state = "restart";
+            var state = State.Restart;
             var gameFinished = false;
 
-            while (state != "exit")
+            while (state != State.Exit)
             {
                 if (gameFinished == false)
                 {
                     switch (state)
                     {
-                        case "restart":
-                            {
-                                Console.WriteLine(Messages.WELCOME);
-                                tiles = MatrixGenerator.GenerateMatrix();
-                                tiles = MatrixGenerator.ShuffleMatrix(tiles);
-                                gameFinished = Gameplay.IsMatrixSolved(tiles);
-                                Gameplay.PrintMatrix(tiles);
-                                break;
-                            }
+                        case State.Restart:
+                        {
+                            Console.WriteLine(Messages.WELCOME);
+                            tiles = MatrixGenerator.GenerateMatrix();
+                            tiles = MatrixGenerator.ShuffleMatrix(tiles);
+                            gameFinished = Gameplay.IsMatrixSolved(tiles);
+                            Gameplay.PrintMatrix(tiles);
+                            state = State.InGame;
+                            break;
+                        }
 
-                        case "top":
-                            {
-                                Scoreboard.PrintScoreboard();
-                                break;
-                            }
-                    }
-
-                    if (gameFinished)
-                    {
-                        continue;
+                        case State.InGame:
+                        {
+                            gameFinished = Gameplay.IsMatrixSolved(tiles);
+                            break;
+                        }
+                        case State.Top:
+                        {
+                            Scoreboard.PrintScoreboard();
+                            break;
+                        }
                     }
 
                     Console.Write(Messages.MOVEINPUT);
-                    state = Console.ReadLine();
+                    string input = Console.ReadLine();
 
                     int destinationTileValue;
 
-                    var isSuccessfulParsing = int.TryParse(state, out destinationTileValue);
+                    var isSuccessfulParsing = int.TryParse(input, out destinationTileValue);
 
                     if (isSuccessfulParsing)
                     {
@@ -67,7 +68,7 @@
                     {
                         try
                         {
-                            state = Command.CommandType(state);
+                            state = Command.CommandType(input);
                         }
                         catch (ArgumentException exception)
                         {
@@ -91,7 +92,7 @@
                         Scoreboard.PrintScoreboard();
                     }
 
-                    state = "restart";
+                    state = State.Restart;
                     gameFinished = false;
                     moves = 0;
                 }

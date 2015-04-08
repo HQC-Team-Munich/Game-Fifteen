@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command.cs" />
-    <Compile Include="Enumerations\Commands.cs" />
+    <Compile Include="Enumerations\State.cs" />
     <Compile Include="Enumerations\Messages.cs" />
     <Compile Include="Gameplay.cs" />
     <Compile Include="MatrixGenerator.cs" />

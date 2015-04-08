@@ -4,6 +4,11 @@
 
     class Tile : IComparable
     {
+        public Tile()
+        {
+            
+        }
+
         public Tile(string label, int position)
         {
             this.Label = label;

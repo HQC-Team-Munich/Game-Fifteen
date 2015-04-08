@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace GameFifteenProject
+﻿namespace GameFifteenProject
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     static class Gameplay
     {
-
         private const int HORIZONTAL_NEIGHBOUR_TILE = 1;
         private const int VERTICAL_NEIGHBOUR_TILE = 4;
         private const int MATRIX_SIZE = 4;
@@ -16,16 +14,16 @@ namespace GameFifteenProject
         {
             Console.WriteLine("  ------------");
             Console.Write("| ");
-            int rowCounter = 0;
-            for (int index = 0; index < 16; index++)
+            var rowCounter = 0;
+            for (var index = 0; index < 16; index++)
             {
-                Tile currentElement = sourceMatrix.ElementAt(index);
+                var currentElement = sourceMatrix.ElementAt(index);
                 
-                if (currentElement.Label == String.Empty)
+                if (currentElement.Label == string.Empty)
                 {
                     Console.Write("   ");
                 }
-                else if (Int32.Parse(currentElement.Label) < 10)
+                else if (int.Parse(currentElement.Label) < 10)
                 {
                     Console.Write(' ' + currentElement.Label + ' ');
                 }
@@ -35,16 +33,19 @@ namespace GameFifteenProject
                 }
 
                 rowCounter++;
-                if (rowCounter == 4)
+                if (rowCounter != 4)
                 {
-                    Console.Write(" |");
-                    Console.WriteLine();
-                    if (index < 12)
-                    {
-                        Console.Write("| ");
-                    }
-                    rowCounter = 0;
+                    continue;
                 }
+
+                Console.Write(" |");
+                Console.WriteLine();
+                if (index < 12)
+                {
+                    Console.Write("| ");
+                }
+
+                rowCounter = 0;
             }
 
             Console.WriteLine("  ------------");
@@ -57,15 +58,15 @@ namespace GameFifteenProject
                 throw new ArgumentException("Invalid move!");
             }
 
-            List<Tile> resultMatrix = tiles;
-            Tile freeTile = tiles[GetFreeTilePosition(tiles)];
-            Tile tile = tiles[GetDestinationTilePosition(tiles, tileValue)];
+            var resultMatrix = tiles;
+            var freeTile = tiles[GetFreeTilePosition(tiles)];
+            var tile = tiles[GetDestinationTilePosition(tiles, tileValue)];
 
-            bool areValidNeighbourTiles = TilePositionValidation(tiles, freeTile, tile);
+            var areValidNeighbourTiles = TilePositionValidation(tiles, freeTile, tile);
 
             if (areValidNeighbourTiles)
             {
-                int targetTilePosition = tile.Position;
+                var targetTilePosition = tile.Position;
                 resultMatrix[targetTilePosition].Position = freeTile.Position;
                 resultMatrix[freeTile.Position].Position = targetTilePosition;
                 resultMatrix.Sort();
@@ -80,74 +81,67 @@ namespace GameFifteenProject
 
         public static bool IsMatrixSolved(List<Tile> tiles)
         {
-            int count = 0;
-            foreach (Tile tile in tiles)
+            var count = 0;
+            foreach (var tile in tiles)
             {
-                int tileLabelInt = 0;
-                Int32.TryParse(tile.Label,out tileLabelInt);
+                var tileLabelInt = 0;
+                int.TryParse(tile.Label,out tileLabelInt);
                 if (tileLabelInt == (tile.Position + 1))
                 {
                     count++;
                 }
             }
 
-            if (count == 15)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return count == 15;
         }
 
-        private static int GetDestinationTilePosition(List<Tile> tiles, int tileValue)
+        private static int GetDestinationTilePosition(IList<Tile> tiles, int tileValue)
         {
-            int result = 0;
-            for (int index = 0; index < tiles.Count; index++)
+            var result = 0;
+            for (var index = 0; index < tiles.Count; index++)
             {
-                int parsedLabel = 0;
-                bool successfulParsing = Int32.TryParse(tiles[index].Label, out parsedLabel);
+                var parsedLabel = 0;
+                var successfulParsing = int.TryParse(tiles[index].Label, out parsedLabel);
                 if (successfulParsing && tileValue == parsedLabel)
                 {
                     result = index;
                 }
             }
+
             return result;
         }
 
         private static bool TilePositionValidation(List<Tile> tiles, Tile freeTile, Tile tile)
         {
-            bool areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
+            var areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
 
             return areValidNeighbourTiles;
         }
 
         private static bool AreValidNeighbourTiles(Tile freeTile, Tile tile)
         {
-            int tilesDistance = freeTile.Position - tile.Position;
-            int tilesAbsoluteDistance = Math.Abs(tilesDistance);
-            bool isValidHorizontalNeighbour =
+            var tilesDistance = freeTile.Position - tile.Position;
+            var tilesAbsoluteDistance = Math.Abs(tilesDistance);
+            var isValidHorizontalNeighbour =
                 (tilesAbsoluteDistance == HORIZONTAL_NEIGHBOUR_TILE && !(((tile.Position + 1) % MATRIX_SIZE == 1 && tilesDistance == -1) || ((tile.Position + 1) % MATRIX_SIZE == 0 && tilesDistance == 1)));
-            bool isValidVerticalNeighbour = (tilesAbsoluteDistance == VERTICAL_NEIGHBOUR_TILE);
-            bool validNeigbour = isValidHorizontalNeighbour || isValidVerticalNeighbour;
+            var isValidVerticalNeighbour = (tilesAbsoluteDistance == VERTICAL_NEIGHBOUR_TILE);
+            var validNeigbour = isValidHorizontalNeighbour || isValidVerticalNeighbour;
 
             return validNeigbour;
         }
 
-        private static int GetFreeTilePosition(List<Tile> tiles)
+        private static int GetFreeTilePosition(IList<Tile> tiles)
         {
-            int result = 0;
-            for (int index = 0; index < tiles.Count; index++)
+            var result = 0;
+            for (var index = 0; index < tiles.Count; index++)
             {
-                if (tiles[index].Label == String.Empty)
+                if (tiles[index].Label == string.Empty)
                 {
                     result = index;
                 }
             }
+
             return result;
         }
-
-
     }
 }

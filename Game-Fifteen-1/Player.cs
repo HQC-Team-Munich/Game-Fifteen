@@ -1,31 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace GameFifteenProject
+﻿namespace GameFifteenProject
 {
-    class Player : IComparable
+    using System;
+
+    public class Player : IComparable
     {
-        private string name;
-        private int moves;
-        public string Name
-        {
-            get { return name; }
-        }
-        public int Moves
-        {
-            get { return moves; }
-        }
+        private readonly string name;
+        private readonly int moves;
+
         public Player(string name, int moves)
         {
             this.name = name;
             this.moves = moves;
         }
+
+        public string Name
+        {
+            get { return this.name; }
+        }
+
+        public int Moves
+        {
+            get { return this.moves; }
+        }
+
         public int CompareTo(object player)
         {
-            Player currentPlayer = (Player)player;
-            int result = this.moves.CompareTo(currentPlayer.Moves);
+            var currentPlayer = (Player)player;
+            var result = this.moves.CompareTo(currentPlayer.Moves);
             return result;
         }
     }

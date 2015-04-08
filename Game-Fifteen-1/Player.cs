@@ -4,29 +4,20 @@
 
     public class Player : IComparable
     {
-        private readonly string name;
-        private readonly int moves;
-
         public Player(string name, int moves)
         {
-            this.name = name;
-            this.moves = moves;
+            this.Name = name;
+            this.Moves = moves;
         }
 
-        public string Name
-        {
-            get { return this.name; }
-        }
+        public string Name { get; private set; }
 
-        public int Moves
-        {
-            get { return this.moves; }
-        }
+        public int Moves { get; private set; }
 
         public int CompareTo(object player)
         {
             var currentPlayer = (Player)player;
-            var result = this.moves.CompareTo(currentPlayer.Moves);
+            var result = this.Moves.CompareTo(currentPlayer.Moves);
             return result;
         }
     }

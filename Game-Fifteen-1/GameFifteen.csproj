@@ -47,10 +47,10 @@
     <Compile Include="Enumerations\Commands.cs" />
     <Compile Include="Gameplay.cs" />
     <Compile Include="MatrixGenerator.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="Scoreboard.cs" />
-    <Compile Include="Tile.cs" />
+    <Compile Include="Models\Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameFifteenProject.csproj" />

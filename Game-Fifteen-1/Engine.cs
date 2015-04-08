@@ -3,20 +3,20 @@
     using System;
     using System.Collections.Generic;
 
-    public class Program
+    public class Engine
     {
         private static void Menu()
         {
             var tiles = new List<Tile>();
             var cnt = 0;
-            var s = "restart";
+            var state = "restart";
             var flag = false;
 
-            while (s != "exit")
+            while (state != "exit")
             {
                 if (!flag)
                 {
-                    switch (s)
+                    switch (state)
                     {
                         case "restart":
                             {
@@ -45,11 +45,11 @@
                     }
 
                     Console.Write("Enter a number to move: ");
-                    s = Console.ReadLine();
+                    state = Console.ReadLine();
 
                     int destinationTileValue;
 
-                    var isSuccessfulParsing = int.TryParse(s, out destinationTileValue);
+                    var isSuccessfulParsing = int.TryParse(state, out destinationTileValue);
 
                     if (isSuccessfulParsing)
                     {
@@ -69,7 +69,7 @@
                     {
                         try
                         {
-                            s = Command.CommandType(s);
+                            state = Command.CommandType(state);
                         }
                         catch (ArgumentException exception)
                         {
@@ -93,7 +93,7 @@
                         Scoreboard.PrintScoreboard();
                     }
 
-                    s = "restart";
+                    state = "restart";
                     flag = false;
                     cnt = 0;
                 }

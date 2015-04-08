@@ -1,4 +1,4 @@
-﻿using ConsoleApplication1.Enumerations;
+﻿using GameFifteenProject.Enumerations;
 
 namespace GameFifteenProject
 {
@@ -11,13 +11,16 @@ namespace GameFifteenProject
             input = input.ToLower();
             string output;
 
-            if (input == Commands.Exit.ToString() || input == Commands.Restart.ToString() || input == Commands.Top.ToString())
+            switch (input)
             {
-                output = input;
-            }
-            else
-            {
-                throw new ArgumentException("Invalid Command!");
+                case "restart":
+                case "exit":
+                case "top":
+                    output = input;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid Command!");
+                    break;
             }
 
             return output;

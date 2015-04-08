@@ -1,4 +1,4 @@
-﻿namespace GameFifteenProject
+﻿namespace GameFifteen
 {
     using System;
 
@@ -17,7 +17,7 @@
 
         public string Label { get; private set; }
 
-        public int Position{ get; set; }
+        public int Position { get; set; }
 
         public int CompareTo(object tile)
         {

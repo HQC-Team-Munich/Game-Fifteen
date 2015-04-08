@@ -1,6 +1,4 @@
-﻿using GameFifteenProject.Enumerations;
-
-namespace GameFifteenProject
+﻿namespace GameFifteen
 {
     using System;
 
@@ -20,7 +18,6 @@ namespace GameFifteenProject
                     break;
                 default:
                     throw new ArgumentException("Invalid Command!");
-                    break;
             }
 
             return output;

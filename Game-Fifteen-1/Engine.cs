@@ -1,33 +1,31 @@
-﻿namespace GameFifteenProject
+﻿namespace GameFifteen
 {
     using System;
     using System.Collections.Generic;
+
+    using GameFifteen.Enumerations;
 
     public class Engine
     {
         private static void Menu()
         {
             var tiles = new List<Tile>();
-            var cnt = 0;
+            var moves = 0;
             var state = "restart";
-            var flag = false;
+            var gameFinished = false;
 
             while (state != "exit")
             {
-                if (!flag)
+                if (gameFinished == false)
                 {
                     switch (state)
                     {
                         case "restart":
                             {
-                                var welcomeMessage = "Welcome to the game “15”. Please try to arrange the numbers sequentially. ";
-                                welcomeMessage = welcomeMessage + "\nUse 'top' to view the top scoreboard, 'restart' to start a new game and 'exit'";
-                                welcomeMessage = welcomeMessage + " \nto quit the game.";
-                                Console.WriteLine();
-                                Console.WriteLine(welcomeMessage);
+                                Console.WriteLine(Messages.WELCOME);
                                 tiles = MatrixGenerator.GenerateMatrix();
                                 tiles = MatrixGenerator.ShuffleMatrix(tiles);
-                                flag = Gameplay.IsMatrixSolved(tiles);
+                                gameFinished = Gameplay.IsMatrixSolved(tiles);
                                 Gameplay.PrintMatrix(tiles);
                                 break;
                             }
@@ -39,12 +37,12 @@
                             }
                     }
 
-                    if (flag)
+                    if (gameFinished)
                     {
                         continue;
                     }
 
-                    Console.Write("Enter a number to move: ");
+                    Console.Write(Messages.MOVEINPUT);
                     state = Console.ReadLine();
 
                     int destinationTileValue;
@@ -56,9 +54,9 @@
                         try
                         {
                             Gameplay.MoveTiles(tiles, destinationTileValue);
-                            cnt++;
+                            moves++;
                             Gameplay.PrintMatrix(tiles);
-                            flag = Gameplay.IsMatrixSolved(tiles);
+                            gameFinished = Gameplay.IsMatrixSolved(tiles);
                         }
                         catch (Exception exception)
                         {
@@ -79,23 +77,23 @@
                 }
                 else
                 {
-                    if (cnt == 0)
+                    if (moves == 0)
                     {
-                        Console.WriteLine("Your matrix was solved by default :) Come on - NEXT try");
+                        Console.WriteLine(Messages.LOSE);
                     }
                     else
                     {
-                        Console.WriteLine("Congratulations! You won the game in {0} moves.", cnt);
-                        Console.Write("Please enter your name for the top scoreboard: ");
+                        Console.WriteLine(Messages.WIN, moves);
+                        Console.Write(Messages.HIGHSCORE);
                         var playerName = Console.ReadLine();
-                        var player = new Player(playerName, cnt);
+                        var player = new Player(playerName, moves);
                         Scoreboard.AddPlayer(player);
                         Scoreboard.PrintScoreboard();
                     }
 
                     state = "restart";
-                    flag = false;
-                    cnt = 0;
+                    gameFinished = false;
+                    moves = 0;
                 }
             }
         }

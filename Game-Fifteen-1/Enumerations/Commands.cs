@@ -1,4 +1,4 @@
-﻿namespace GameFifteenProject.Enumerations
+﻿namespace GameFifteen.Enumerations
 {
     public enum Commands
     {

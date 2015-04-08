@@ -1,4 +1,4 @@
-﻿namespace GameFifteenProject
+﻿namespace GameFifteen
 {
     using System;
 

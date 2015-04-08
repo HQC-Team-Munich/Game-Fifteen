@@ -8,8 +8,8 @@
     <ProjectGuid>{EE945DFB-A7C6-48B5-A3ED-9079C6FA71B4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleApplication1</RootNamespace>
-    <AssemblyName>ConsoleApplication1</AssemblyName>
+    <RootNamespace>GameFifteen</RootNamespace>
+    <AssemblyName>GameFifteen</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Command.cs" />
     <Compile Include="Enumerations\Commands.cs" />
+    <Compile Include="Enumerations\Messages.cs" />
     <Compile Include="Gameplay.cs" />
     <Compile Include="MatrixGenerator.cs" />
     <Compile Include="Models\Player.cs" />

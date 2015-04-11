@@ -16,12 +16,15 @@ namespace GameFifteen
                 case "restart":
                     result = State.Restart;
                     break;
+
                 case "exit":
                     result = State.Exit;
                     break;
+
                 case "top":
                     result = State.Top;
                     break;
+
                 default:
                     throw new ArgumentException("Invalid Command!");
                     break;

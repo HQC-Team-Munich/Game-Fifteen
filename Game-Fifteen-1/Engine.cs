@@ -3,20 +3,20 @@
     using System;
     using System.Collections.Generic;
 
-    using GameFifteen.Enumerations;
+    using Enumerations;
 
     public class Engine
     {
         private static void Menu()
         {
             var tiles = new List<Tile>();
-            var moves = 0;
+            var movesCount = 0;
             var state = State.Restart;
-            var gameFinished = false;
+            var isGameFinished = false;
 
             while (state != State.Exit)
             {
-                if (gameFinished == false)
+                if (isGameFinished == false)
                 {
                     switch (state)
                     {
@@ -25,7 +25,7 @@
                             Console.WriteLine(Messages.WELCOME);
                             tiles = MatrixGenerator.GenerateMatrix();
                             tiles = MatrixGenerator.ShuffleMatrix(tiles);
-                            gameFinished = Gameplay.IsMatrixSolved(tiles);
+                            isGameFinished = Gameplay.IsMatrixSolved(tiles);
                             Gameplay.PrintMatrix(tiles);
                             state = State.InGame;
                             break;
@@ -33,7 +33,7 @@
 
                         case State.InGame:
                         {
-                            gameFinished = Gameplay.IsMatrixSolved(tiles);
+                            isGameFinished = Gameplay.IsMatrixSolved(tiles);
                             break;
                         }
                         case State.Top:
@@ -55,9 +55,9 @@
                         try
                         {
                             Gameplay.MoveTiles(tiles, destinationTileValue);
-                            moves++;
+                            movesCount++;
                             Gameplay.PrintMatrix(tiles);
-                            gameFinished = Gameplay.IsMatrixSolved(tiles);
+                            isGameFinished = Gameplay.IsMatrixSolved(tiles);
                         }
                         catch (Exception exception)
                         {
@@ -78,23 +78,23 @@
                 }
                 else
                 {
-                    if (moves == 0)
+                    if (movesCount == 0)
                     {
                         Console.WriteLine(Messages.LOSE);
                     }
                     else
                     {
-                        Console.WriteLine(Messages.WIN, moves);
+                        Console.WriteLine(Messages.WIN, movesCount);
                         Console.Write(Messages.HIGHSCORE);
                         var playerName = Console.ReadLine();
-                        var player = new Player(playerName, moves);
+                        var player = new Player(playerName, movesCount);
                         Scoreboard.AddPlayer(player);
                         Scoreboard.PrintScoreboard();
                     }
 
                     state = State.Restart;
-                    gameFinished = false;
-                    moves = 0;
+                    isGameFinished = false;
+                    movesCount = 0;
                 }
             }
         }

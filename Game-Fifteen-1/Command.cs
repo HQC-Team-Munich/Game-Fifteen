@@ -1,8 +1,8 @@
-﻿using GameFifteen.Enumerations;
-
-namespace GameFifteen
+﻿namespace GameFifteen
 {
+
     using System;
+    using Enumerations;
 
     public static class Command
     {

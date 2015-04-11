@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-
     using Enumerations;
 
     public class Engine
@@ -21,7 +20,6 @@
                     switch (state)
                     {
                         case State.Restart:
-                        {
                             Console.WriteLine(Messages.WELCOME);
                             tiles = MatrixGenerator.GenerateMatrix();
                             tiles = MatrixGenerator.ShuffleMatrix(tiles);
@@ -29,18 +27,15 @@
                             Gameplay.PrintMatrix(tiles);
                             state = State.InGame;
                             break;
-                        }
 
                         case State.InGame:
-                        {
                             isGameFinished = Gameplay.IsMatrixSolved(tiles);
                             break;
-                        }
+
                         case State.Top:
-                        {
                             Scoreboard.PrintScoreboard();
                             break;
-                        }
+                        
                     }
 
                     Console.Write(Messages.MOVEINPUT);
@@ -59,7 +54,7 @@
                             Gameplay.PrintMatrix(tiles);
                             isGameFinished = Gameplay.IsMatrixSolved(tiles);
                         }
-                        catch (Exception exception)
+                        catch (Exception exception) // bad practice Need to be more explicit
                         {
                             Console.WriteLine(exception.Message);
                         }

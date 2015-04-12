@@ -27,7 +27,7 @@
 
                 default:
                     throw new ArgumentException("Invalid Command!");
-                    break;
+                    
             }
 
             return result;

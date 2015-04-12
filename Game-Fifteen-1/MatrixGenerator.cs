@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Models;
 
-    static class MatrixGenerator
+    public static class MatrixGenerator
     {
         private const int HORIZONTAL_NEIGHBOUR_TILE = 1;
         private const int VERTICAL_NEIGHBOUR_TILE = 4;

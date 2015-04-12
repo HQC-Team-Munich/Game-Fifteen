@@ -25,21 +25,7 @@
             {
                 if (!isGameFinished)
                 {
-                    switch (gameState)
-                    {
-                        case State.Restart:
-                            tiles = RestartGame(tiles);
-                            break;
-
-                        case State.InGame:
-                            isGameFinished = Gameplay.IsMatrixSolved(tiles);
-                            break;
-
-                        case State.Top:
-                            Scoreboard.PrintScoreboard();
-                            break;
-                        
-                    }
+                    ResolveGameState();
 
                     Console.Write(Messages.MOVEINPUT);
                     string input = Console.ReadLine();
@@ -50,6 +36,24 @@
                 {
                     ProceedGameOver();
                 }
+            }
+        }
+
+        private static void ResolveGameState()
+        {
+            switch (gameState)
+            {
+                case State.Restart:
+                    tiles = RestartGame(tiles);
+                    break;
+
+                case State.InGame:
+                    isGameFinished = Gameplay.IsMatrixSolved(tiles);
+                    break;
+
+                case State.Top:
+                    Scoreboard.PrintScoreboard();
+                    break;
             }
         }
 

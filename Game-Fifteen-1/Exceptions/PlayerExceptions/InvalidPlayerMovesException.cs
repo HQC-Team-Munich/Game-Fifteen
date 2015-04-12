@@ -11,33 +11,31 @@
         /// </summary>
         public InvalidPlayerMovesException() : base()
         {
-
         }
 
-        public InvalidPlayerMovesException(string message) : base(message)
+        public InvalidPlayerMovesException(string message) 
+            : base(message)
         {
-
         }
 
-        public InvalidPlayerMovesException(string format, params object[] args) : base(string.Format(format, args))
+        public InvalidPlayerMovesException(string format, params object[] args) 
+            : base(string.Format(format, args))
         {
-
         }
 
-        public InvalidPlayerMovesException(string message, Exception innerException) : base(message, innerException)
+        public InvalidPlayerMovesException(string message, Exception innerException) 
+            : base(message, innerException)
         {
-
         }
 
         public InvalidPlayerMovesException(string format, Exception innerException, params object[] args)
                                           : base(string.Format(format, args), innerException)
         {
-
         }
 
-        protected InvalidPlayerMovesException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected InvalidPlayerMovesException(SerializationInfo info, StreamingContext context) 
+            : base(info, context)
         {
-
         }
     }
 }

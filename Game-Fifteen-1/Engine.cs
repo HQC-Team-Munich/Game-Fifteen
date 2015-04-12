@@ -9,26 +9,26 @@
 
     public class Engine
     {
+        private static List<ITile> tiles;
+        private static int movesCount;
+        private static State gameState;
+        private static bool isGameFinished;
+
         private static void Menu()
         {
-            var tiles = new List<ITile>();
-            var movesCount = 0;
-            var state = State.Restart;
-            var isGameFinished = false;
+            tiles = new List<ITile>();
+            movesCount = 0;
+            gameState = State.Restart;
+            isGameFinished = false;
 
-            while (state != State.Exit)
+            while (gameState != State.Exit)
             {
-                if (isGameFinished == false)
+                if (!isGameFinished)
                 {
-                    switch (state)
+                    switch (gameState)
                     {
                         case State.Restart:
-                            Console.WriteLine(Messages.WELCOME);
-                            tiles = MatrixGenerator.GenerateMatrix();
-                            tiles = MatrixGenerator.ShuffleMatrix(tiles);
-                            isGameFinished = Gameplay.IsMatrixSolved(tiles);
-                            Gameplay.PrintMatrix(tiles);
-                            state = State.InGame;
+                            tiles = RestartGame(tiles);
                             break;
 
                         case State.InGame:
@@ -44,57 +44,78 @@
                     Console.Write(Messages.MOVEINPUT);
                     string input = Console.ReadLine();
 
-                    int destinationTileValue;
-
-                    var isSuccessfulParsing = int.TryParse(input, out destinationTileValue);
-
-                    if (isSuccessfulParsing)
-                    {
-                        try
-                        {
-                            Gameplay.MoveTiles(tiles, destinationTileValue);
-                            movesCount++;
-                            Gameplay.PrintMatrix(tiles);
-                            isGameFinished = Gameplay.IsMatrixSolved(tiles);
-                        }
-                        catch (Exception exception) // bad practice Need to be more explicit
-                        {
-                            Console.WriteLine(exception.Message);
-                        }
-                    }
-                    else
-                    {
-                        try
-                        {
-                            state = Command.CommandType(input);
-                        }
-                        catch (ArgumentException exception)
-                        {
-                            Console.WriteLine(exception.Message);
-                        }
-                    }
+                    ProceedMove(input);
                 }
                 else
                 {
-                    if (movesCount == 0)
-                    {
-                        Console.WriteLine(Messages.LOSE);
-                    }
-                    else
-                    {
-                        Console.WriteLine(Messages.WIN, movesCount);
-                        Console.Write(Messages.HIGHSCORE);
-                        var playerName = Console.ReadLine();
-                        IPlayer player = new Player(playerName, movesCount);
-                        Scoreboard.AddPlayer(player);
-                        Scoreboard.PrintScoreboard();
-                    }
-
-                    state = State.Restart;
-                    isGameFinished = false;
-                    movesCount = 0;
+                    ProceedGameOver();
                 }
             }
+        }
+
+        private static void ProceedGameOver()
+        {
+            if (movesCount == 0)
+            {
+                Console.WriteLine(Messages.LOSE);
+            }
+            else
+            {
+                Console.WriteLine(Messages.WIN, movesCount);
+                Console.Write(Messages.HIGHSCORE);
+
+                var playerName = Console.ReadLine();
+                IPlayer player = new Player(playerName, movesCount);
+                Scoreboard.AddPlayer(player);
+                Scoreboard.PrintScoreboard();
+            }
+
+            gameState = State.Restart;
+            isGameFinished = false;
+            movesCount = 0;
+        }
+
+        private static void ProceedMove(string input)
+        {
+            int destinationTileValue;
+            var isSuccessfulParsing = int.TryParse(input, out destinationTileValue);
+
+            if (isSuccessfulParsing)
+            {
+                try
+                {
+                    Gameplay.MoveTiles(tiles, destinationTileValue);
+                    movesCount++;
+                    Gameplay.PrintMatrix(tiles);
+                    isGameFinished = Gameplay.IsMatrixSolved(tiles);
+                }
+                catch (Exception exception) // bad practice Need to be more explicit
+                {
+                    Console.WriteLine(exception.Message);
+                }
+            }
+            else
+            {
+                try
+                {
+                    gameState = Command.CommandType(input);
+                }
+                catch (ArgumentException exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
+            }
+        }
+
+        private static List<ITile> RestartGame(List<ITile> tiles)
+        {
+            Console.WriteLine(Messages.WELCOME);
+            tiles = MatrixGenerator.GenerateMatrix();
+            tiles = MatrixGenerator.ShuffleMatrix(tiles);
+            isGameFinished = Gameplay.IsMatrixSolved(tiles);
+            Gameplay.PrintMatrix(tiles);
+            gameState = State.InGame;
+            return tiles;
         }
 
         static void Main()

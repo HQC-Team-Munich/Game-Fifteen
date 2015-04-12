@@ -54,6 +54,8 @@
     <Compile Include="Exceptions\TileExceptions\InvalidTilePositionException.cs" />
     <Compile Include="Exceptions\TileExceptions\TileException.cs" />
     <Compile Include="Gameplay.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\ITile.cs" />
     <Compile Include="MatrixGenerator.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Engine.cs" />

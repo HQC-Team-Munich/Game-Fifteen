@@ -3,13 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Interfaces;
     using Models;
 
     public static class Scoreboard
     {
-        private static readonly List<Player> Players = new List<Player>();
+        private static readonly List<IPlayer> Players = new List<IPlayer>();
 
-        public static void AddPlayer(Player player)
+        public static void AddPlayer(IPlayer player)
         {
             Players.Add(player);
             Players.Sort();

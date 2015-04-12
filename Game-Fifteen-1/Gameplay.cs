@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Interfaces;
     using Models;
 
     public static class Gameplay
@@ -11,7 +12,7 @@
         private const int VERTICAL_NEIGHBOUR_TILE = 4;
         private const int MATRIX_SIZE = 4;
 
-        public static void PrintMatrix(List<Tile> sourceMatrix)
+        public static void PrintMatrix(List<ITile> sourceMatrix)
         {
             Console.WriteLine("  ------------");
             Console.Write("| ");
@@ -52,7 +53,7 @@
             Console.WriteLine("  ------------");
         }
 
-        public static List<Tile> MoveTiles(List<Tile> tiles, int tileValue)
+        public static List<ITile> MoveTiles(List<ITile> tiles, int tileValue)
         {
             if (tileValue < 0 || tileValue > 15)
             {
@@ -80,7 +81,7 @@
             return resultMatrix;
         }
 
-        public static bool IsMatrixSolved(List<Tile> tiles)
+        public static bool IsMatrixSolved(List<ITile> tiles)
         {
             var count = 0;
             foreach (var tile in tiles)
@@ -96,7 +97,7 @@
             return count == 15;
         }
 
-        private static int GetDestinationTilePosition(IList<Tile> tiles, int tileValue)
+        private static int GetDestinationTilePosition(List<ITile> tiles, int tileValue)
         {
             var result = 0;
             for (var index = 0; index < tiles.Count; index++)
@@ -112,14 +113,14 @@
             return result;
         }
 
-        private static bool TilePositionValidation(List<Tile> tiles, Tile freeTile, Tile tile)
+        private static bool TilePositionValidation(List<ITile> tiles, ITile freeTile, ITile tile)
         {
             var areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
 
             return areValidNeighbourTiles;
         }
 
-        private static bool AreValidNeighbourTiles(Tile freeTile, Tile tile)
+        private static bool AreValidNeighbourTiles(ITile freeTile, ITile tile)
         {
             var tilesDistance = freeTile.Position - tile.Position;
             var tilesAbsoluteDistance = Math.Abs(tilesDistance);
@@ -131,7 +132,7 @@
             return validNeigbour;
         }
 
-        private static int GetFreeTilePosition(IList<Tile> tiles)
+        private static int GetFreeTilePosition(List<ITile> tiles)
         {
             var result = 0;
             for (var index = 0; index < tiles.Count; index++)

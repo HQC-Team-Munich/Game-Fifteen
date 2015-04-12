@@ -3,8 +3,9 @@
     using System;
     using System.Linq;
     using Exceptions.PlayerExceptions;
+    using Interfaces;
 
-    public class Player : IComparable
+    public class Player : IPlayer, IComparable
     {
         /// <summary>
         /// Player Class

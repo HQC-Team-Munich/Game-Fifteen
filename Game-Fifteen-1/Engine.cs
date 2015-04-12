@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Enumerations;
+    using Interfaces;
     using Models;
 
 
@@ -10,7 +11,7 @@
     {
         private static void Menu()
         {
-            var tiles = new List<Tile>();
+            var tiles = new List<ITile>();
             var movesCount = 0;
             var state = State.Restart;
             var isGameFinished = false;
@@ -84,7 +85,7 @@
                         Console.WriteLine(Messages.WIN, movesCount);
                         Console.Write(Messages.HIGHSCORE);
                         var playerName = Console.ReadLine();
-                        var player = new Player(playerName, movesCount);
+                        IPlayer player = new Player(playerName, movesCount);
                         Scoreboard.AddPlayer(player);
                         Scoreboard.PrintScoreboard();
                     }

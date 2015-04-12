@@ -3,8 +3,9 @@
     using System;
     using System.Linq;
     using Exceptions.TileExceptions;
+    using Interfaces;
 
-    public class Tile : IComparable
+    public class Tile : ITile, IComparable
     {
         #region Fields
         private string label;

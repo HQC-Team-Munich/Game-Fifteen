@@ -89,17 +89,19 @@
             return freeTile;
         }
 
-        private static List<ITile> GenerateNeighbourTilesList(ITile freeTile, ITile tile, List<ITile> neighbourTiles)
-        {
-            bool areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
+        //This method is not used anywhere! Find usages if you can.
+        #region Find usage if you can.
+        //private static List<ITile> GenerateNeighbourTilesList(ITile freeTile, ITile tile, List<ITile> neighbourTiles)
+        //{
+        //    bool areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
 
-            if (areValidNeighbourTiles)
-            {
-                neighbourTiles.Add(tile);
-            }
+        //    if (areValidNeighbourTiles)
+        //    {
+        //        neighbourTiles.Add(tile);
+        //    }
 
-            return neighbourTiles;
-        }
-
+        //    return neighbourTiles;
+        //}
+        #endregion
     }
 }

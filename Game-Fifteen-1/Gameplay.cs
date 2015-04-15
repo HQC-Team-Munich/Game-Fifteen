@@ -8,30 +8,37 @@
 
     public static class Gameplay
     {
-        private const int HORIZONTAL_NEIGHBOUR_TILE = 1;
-        private const int VERTICAL_NEIGHBOUR_TILE = 4;
-        private const int MATRIX_SIZE = 4;
+        private const int HorizontalNeighbourTile = 1;
+        private const int VerticalNeighbourTile = 4;
+        private const int MatrixSize = 4;
 
         public static void PrintMatrix(List<ITile> sourceMatrix)
         {
-            Console.WriteLine("  ------------");
-            Console.Write("| ");
-            var rowCounter = 0;
-            for (var index = 0; index < 16; index++)
+            const string Line = "  -------------";
+            const string LeftPipe = "| ";
+            const string RightPipe = " |";
+            const string Spacing = " ";
+            const string Margin = "   ";
+
+            Console.WriteLine(Line);
+            Console.Write(LeftPipe);
+
+            int rowCounter = 0;
+            for (int index = 0; index < 16; index++)
             {
                 var currentElement = sourceMatrix.ElementAt(index);
                 
                 if (currentElement.Label == string.Empty)
                 {
-                    Console.Write("   ");
+                    Console.Write(Margin);
                 }
                 else if (int.Parse(currentElement.Label) < 10)
                 {
-                    Console.Write(' ' + currentElement.Label + ' ');
+                    Console.Write(Spacing + currentElement.Label + Spacing);
                 }
                 else
                 {
-                    Console.Write(currentElement.Label + ' ');
+                    Console.Write(currentElement.Label + Spacing);
                 }
 
                 rowCounter++;
@@ -40,17 +47,16 @@
                     continue;
                 }
 
-                Console.Write(" |");
-                Console.WriteLine();
+                Console.WriteLine(RightPipe);
                 if (index < 12)
                 {
-                    Console.Write("| ");
+                    Console.Write(LeftPipe);
                 }
 
                 rowCounter = 0;
             }
 
-            Console.WriteLine("  ------------");
+            Console.WriteLine(Line);
         }
 
         public static List<ITile> MoveTiles(List<ITile> tiles, int tileValue)
@@ -126,8 +132,8 @@
             var tilesAbsoluteDistance = Math.Abs(tilesDistance);
             // TODO: Fix
             var isValidHorizontalNeighbour =
-                (tilesAbsoluteDistance == HORIZONTAL_NEIGHBOUR_TILE && !(((tile.Position + 1) % MATRIX_SIZE == 1 && tilesDistance == -1) || ((tile.Position + 1) % MATRIX_SIZE == 0 && tilesDistance == 1)));
-            var isValidVerticalNeighbour = (tilesAbsoluteDistance == VERTICAL_NEIGHBOUR_TILE);
+                (tilesAbsoluteDistance == HorizontalNeighbourTile && !(((tile.Position + 1) % MatrixSize == 1 && tilesDistance == -1) || ((tile.Position + 1) % MatrixSize == 0 && tilesDistance == 1)));
+            var isValidVerticalNeighbour = (tilesAbsoluteDistance == VerticalNeighbourTile);
             var validNeigbour = isValidHorizontalNeighbour || isValidVerticalNeighbour;
 
             return validNeigbour;

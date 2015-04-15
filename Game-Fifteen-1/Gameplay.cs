@@ -39,18 +39,16 @@
                 }
 
                 rowCounter++;
-                if (rowCounter != 4)
+                if (rowCounter == 4)
                 {
-                    continue;
-                }
+                    Console.WriteLine(RightPipe);
+                    if (index < 12)
+                    {
+                        Console.Write(LeftPipe);
+                    }
 
-                Console.WriteLine(RightPipe);
-                if (index < 12)
-                {
-                    Console.Write(LeftPipe);
+                    rowCounter = 0;
                 }
-
-                rowCounter = 0;
             }
 
             Console.WriteLine(Line);

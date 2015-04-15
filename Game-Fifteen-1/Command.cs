@@ -1,6 +1,5 @@
 ﻿namespace GameFifteen
 {
-
     using System;
     using Enumerations;
 

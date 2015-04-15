@@ -3,14 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Interfaces;
+    using Constants;
 
     public static class Gameplay
     {
-        private const int HorizontalNeighbourTile = 1;
-        private const int VerticalNeighbourTile = 4;
-        private const int MatrixSize = 4;
-
         public static void PrintMatrix(List<ITile> sourceMatrix)
         {
             const string Line = "  -------------";
@@ -131,8 +129,8 @@
             var tilesAbsoluteDistance = Math.Abs(tilesDistance);
             // TODO: Fix
             var isValidHorizontalNeighbour =
-                (tilesAbsoluteDistance == HorizontalNeighbourTile && !(((tile.Position + 1) % MatrixSize == 1 && tilesDistance == -1) || ((tile.Position + 1) % MatrixSize == 0 && tilesDistance == 1)));
-            var isValidVerticalNeighbour = (tilesAbsoluteDistance == VerticalNeighbourTile);
+                (tilesAbsoluteDistance == Matrix.HorizontalNeighbourTile && !(((tile.Position + 1) % Matrix.MatrixSize == 1 && tilesDistance == -1) || ((tile.Position + 1) % Matrix.MatrixSize == 0 && tilesDistance == 1)));
+            var isValidVerticalNeighbour = (tilesAbsoluteDistance == Matrix.VerticalNeighbourTile);
             var validNeigbour = isValidHorizontalNeighbour || isValidVerticalNeighbour;
 
             return validNeigbour;

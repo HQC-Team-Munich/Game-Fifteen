@@ -7,8 +7,6 @@
             Engine gameFifteenEngine = new Engine();
 
             gameFifteenEngine.Run();
-
-            
         }
     }
 }

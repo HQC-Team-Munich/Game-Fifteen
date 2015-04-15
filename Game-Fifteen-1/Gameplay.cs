@@ -87,10 +87,10 @@
         public static bool IsMatrixSolved(List<ITile> tiles)
         {
             int count = 0;
+            int tileLabelInt;
 
             foreach (ITile tile in tiles)
             {
-                int tileLabelInt = 0;
                 int.TryParse(tile.Label, out tileLabelInt);
 
                 if (tileLabelInt == (tile.Position + 1))
@@ -105,11 +105,12 @@
         private static int GetDestinationTilePosition(List<ITile> tiles, int tileValue)
         {
             int result = 0;
+            int parsedLabel;
+            bool successfulParsing;
 
             for (int index = 0; index < tiles.Count; index++)
             {
-                var parsedLabel = 0;
-                var successfulParsing = int.TryParse(tiles[index].Label, out parsedLabel);
+                successfulParsing = int.TryParse(tiles[index].Label, out parsedLabel);
 
                 if (successfulParsing && tileValue == parsedLabel)
                 {

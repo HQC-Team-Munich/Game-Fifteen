@@ -3,39 +3,33 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Interfaces;
 
     public static class Scoreboard
     {
-        private static readonly List<IPlayer> Players = new List<IPlayer>();
+        private static List<IPlayer> players = new List<IPlayer>();
 
         public static void AddPlayer(IPlayer player)
         {
-            Players.Add(player);
-            Players.Sort();
+            players.Add(player);
+            players.Sort();
             DeleteAllExceptTopPlayers();
         }
 
         public static void PrintScoreboard()
         {
             Console.WriteLine("Scoreboard:");
-            // TODO: Fix
-            foreach (var scoreboardLine in Players.Select(player => (Players.IndexOf(player) + 1).ToString() + ". " + player.Name + " --> " + player.Moves.ToString() + " moves"))
+            foreach (IPlayer player in players)
             {
+                string scoreboardLine = (players.IndexOf(player) + 1) + ". " + player.Name + " --> " + player.Moves + " moves";
                 Console.WriteLine(scoreboardLine);
             }
         }
 
         private static void DeleteAllExceptTopPlayers()
         {
-            //Can be implemented with linq or lambdas
-            for (var index = 0; index < Players.Count(); index++)
-            {
-                if (index > 4)
-                {
-                    Players.Remove(Players[index]);
-                }
-            }
+            players = players.Take(4).ToList();
         }
     }
 }

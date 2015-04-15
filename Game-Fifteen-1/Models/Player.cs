@@ -6,7 +6,7 @@
     using Exceptions.PlayerExceptions;
     using Interfaces;
 
-    public class Player : IPlayer, IComparable
+    public class Player : IPlayer
     {
         /// <summary>
         /// Player Class

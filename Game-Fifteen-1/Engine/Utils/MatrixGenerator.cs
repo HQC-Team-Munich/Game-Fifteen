@@ -12,13 +12,13 @@
     {
         private const int MinimumCycles = 20;
         private const int MaximumCycles = 50;
-        private static Random random;
+        private static readonly Random Random = new Random();
 
         public static List<ITile> GenerateMatrix()
         {
             List<ITile> tiles = new List<ITile>();
             Tile tempTile = null;
-            string currentTileName = String.Empty;
+            string currentTileName = string.Empty;
 
             for (int index = 0; index < 15; index++)
             {
@@ -37,8 +37,7 @@
 
         public static List<ITile> ShuffleMatrix(List<ITile> startingMatrix)
         {
-            random = new Random();
-            int cycleCount = random.Next(MinimumCycles, MaximumCycles);
+            int cycleCount = Random.Next(MinimumCycles, MaximumCycles);
            
             for (int index = 0; index < cycleCount; index++)
             {
@@ -48,18 +47,23 @@
             return startingMatrix;
         }
 
+        public static bool AreValidNeighbourTiles(ITile freeTile, ITile tile)
+        {
+            int tilesAbsoluteDistance = Math.Abs(freeTile.Position - tile.Position);
+
+            bool isValidHorizontalNeighbour = (tilesAbsoluteDistance == Matrix.HorizontalNeighbourTile);
+
+            bool isValidVerticalNeighbour = (tilesAbsoluteDistance == Matrix.VerticalNeighbourTile);
+
+            return isValidHorizontalNeighbour || isValidVerticalNeighbour;
+        }
+
         private static List<ITile> MoveFreeTile(List<ITile> resultMatrix)
         {
             ITile freeTile = DetermineFreeTile(resultMatrix);
-
-            List<ITile> neighbourTiles = new List<ITile>();
-
-            neighbourTiles = resultMatrix.Aggregate(
-                neighbourTiles,
-                (current, tile) => GenerateNeighbourTilesList(freeTile, tile, current));
-
-            var switchedindexNumber = random.Next() % (neighbourTiles.Count());
-            var targetTile = neighbourTiles[switchedindexNumber];
+            
+            int switchedIndexNumber = Random.Next() % resultMatrix.Count();
+            ITile targetTile = resultMatrix[switchedIndexNumber];
 
             int targetTilePosition = targetTile.Position;
             resultMatrix[targetTile.Position].Position = freeTile.Position;
@@ -74,9 +78,12 @@
         {
             ITile freeTile = new Tile();
 
-            foreach (var tile in resultMatrix.Where(tile => tile.Label == string.Empty))
+            foreach (ITile tile in resultMatrix)
             {
-                freeTile = tile;
+                if (tile.Label == string.Empty)
+                {
+                    freeTile = tile;
+                }
             }
 
             return freeTile;
@@ -94,19 +101,5 @@
             return neighbourTiles;
         }
 
-        public static bool AreValidNeighbourTiles(ITile freeTile, ITile tile)
-        {
-            var tilesDistance = freeTile.Position - tile.Position;
-            var tilesAbsoluteDistance = Math.Abs(tilesDistance);
-            // TODO: Fix
-            var isValidHorizontalNeighbour =
-                ((tilesAbsoluteDistance == Matrix.HorizontalNeighbourTile)
-                && !(((tile.Position + 1) % Matrix.MatrixSize == 1 && tilesDistance == -1) 
-                || ((tile.Position + 1) % Matrix.MatrixSize == 0 && tilesDistance == 1)));
-            var isValidVerticalNeighbour = (tilesAbsoluteDistance == Matrix.VerticalNeighbourTile);
-            var validNeigbour = isValidHorizontalNeighbour || isValidVerticalNeighbour;
-
-            return validNeigbour;
-        }
     }
 }

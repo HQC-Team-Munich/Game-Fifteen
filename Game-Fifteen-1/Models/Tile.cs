@@ -1,18 +1,18 @@
 ﻿namespace GameFifteen.Models
 {
-    using System;
     using System.Linq;
+
     using Exceptions.TileExceptions;
     using Interfaces;
 
-    public class Tile : ITile, IComparable
+    public class Tile : ITile
     {
         #region Fields
         private string label;
         private int position;
         #endregion
 
-        #region Contructors
+        #region Constructors
         public Tile()
         {
 
@@ -24,7 +24,6 @@
             this.Position = position;
         }
         #endregion
-
 
         #region Properties
         public string Label

@@ -11,12 +11,12 @@
 
     public class Engine
     {
+        private static Engine instance;
+
         private List<ITile> tiles;
         private int movesCount;
         private State gameState;
         private bool isGameFinished;
-
-        private static Engine instance = null;
 
         public Engine()
         {
@@ -30,12 +30,37 @@
             }
         }
 
+        public void Run()
+        {
+            tiles = new List<ITile>();
+            movesCount = 0;
+            gameState = State.Restart;
+            isGameFinished = false;
+
+            while (gameState != State.Exit)
+            {
+                if (!isGameFinished)
+                {
+                    ResolveGameState();
+
+                    Console.Write(Messages.MoveInput);
+                    string input = Console.ReadLine();
+
+                    ProceedMove(input);
+                }
+                else
+                {
+                    ProceedGameOver();
+                }
+            }
+        }
+
         private void ResolveGameState()
         {
             switch (gameState)
             {
                 case State.Restart:
-                    tiles = RestartGame(tiles);
+                    RestartGame();
                     break;
 
                 case State.InGame:
@@ -102,7 +127,7 @@
             }
         }
 
-        private List<ITile> RestartGame(List<ITile> tiles)
+        private void RestartGame()
         {
             Console.WriteLine(Messages.Welcome);
             tiles = MatrixGenerator.GenerateMatrix();
@@ -110,33 +135,6 @@
             isGameFinished = Gameplay.IsMatrixSolved(tiles);
             Gameplay.PrintMatrix(tiles);
             gameState = State.InGame;
-
-            return tiles;
-        }
-
-        public void Run()
-        {
-            tiles = new List<ITile>();
-            movesCount = 0;
-            gameState = State.Restart;
-            isGameFinished = false;
-
-            while (gameState != State.Exit)
-            {
-                if (!isGameFinished)
-                {
-                    ResolveGameState();
-
-                    Console.Write(Messages.MoveInput);
-                    string input = Console.ReadLine();
-
-                    ProceedMove(input);
-                }
-                else
-                {
-                    ProceedGameOver();
-                }
-            }
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class GameFifteenMain
     {
-        static void Main()
+        public static void Main()
         {
             Engine gameFifteenEngine = new Engine();
 

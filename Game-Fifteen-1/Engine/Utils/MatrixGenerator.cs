@@ -1,4 +1,4 @@
-﻿namespace GameFifteen
+﻿namespace GameFifteen.Utils
 {
     using System;
     using System.Collections.Generic;
@@ -39,7 +39,6 @@
         {
             random = new Random();
             int cycleCount = random.Next(MinimumCycles, MaximumCycles);
-            //var resultMatrix = startingMatrix;
            
             for (int index = 0; index < cycleCount; index++)
             {
@@ -51,7 +50,7 @@
 
         private static List<ITile> MoveFreeTile(List<ITile> resultMatrix)
         {
-            var freeTile = DetermineFreeTile(resultMatrix);
+            ITile freeTile = DetermineFreeTile(resultMatrix);
 
             List<ITile> neighbourTiles = new List<ITile>();
 
@@ -62,7 +61,7 @@
             var switchedindexNumber = random.Next() % (neighbourTiles.Count());
             var targetTile = neighbourTiles[switchedindexNumber];
 
-            var targetTilePosition = targetTile.Position;
+            int targetTilePosition = targetTile.Position;
             resultMatrix[targetTile.Position].Position = freeTile.Position;
             resultMatrix[freeTile.Position].Position = targetTilePosition;
 
@@ -83,12 +82,10 @@
             return freeTile;
         }
 
-        private static List<ITile> GenerateNeighbourTilesList(
-            ITile freeTile,
-            ITile tile,
-            List<ITile> neighbourTiles)
+        private static List<ITile> GenerateNeighbourTilesList(ITile freeTile, ITile tile, List<ITile> neighbourTiles)
         {
-            var areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
+            bool areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
+
             if (areValidNeighbourTiles)
             {
                 neighbourTiles.Add(tile);
@@ -97,7 +94,7 @@
             return neighbourTiles;
         }
 
-        private static bool AreValidNeighbourTiles(ITile freeTile, ITile tile)
+        public static bool AreValidNeighbourTiles(ITile freeTile, ITile tile)
         {
             var tilesDistance = freeTile.Position - tile.Position;
             var tilesAbsoluteDistance = Math.Abs(tilesDistance);

@@ -5,7 +5,7 @@
     using System.Linq;
 
     using Interfaces;
-    using Constants;
+    using Utils;
 
     public static class Gameplay
     {
@@ -67,7 +67,7 @@
             ITile freeTile = tiles[GetFreeTilePosition(tiles)];
             ITile tile = tiles[GetDestinationTilePosition(tiles, tileValue)];
 
-            bool areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
+            bool areValidNeighbourTiles = MatrixGenerator.AreValidNeighbourTiles(freeTile, tile);
 
             if (areValidNeighbourTiles)
             {
@@ -118,21 +118,6 @@
             }
 
             return result;
-        }
-
-        private static bool AreValidNeighbourTiles(ITile freeTile, ITile tile)
-        {
-            int tilesDistance = freeTile.Position - tile.Position;
-            int tilesAbsoluteDistance = Math.Abs(tilesDistance);
-            // TODO: Fix
-            bool isValidHorizontalNeighbour =
-                (tilesAbsoluteDistance == Matrix.HorizontalNeighbourTile && 
-                !(((tile.Position + 1) % Matrix.MatrixSize == 1 && tilesDistance == -1) 
-                || ((tile.Position + 1) % Matrix.MatrixSize == 0 && tilesDistance == 1)));
-            bool isValidVerticalNeighbour = (tilesAbsoluteDistance == Matrix.VerticalNeighbourTile);
-            bool validNeigbour = isValidHorizontalNeighbour || isValidVerticalNeighbour;
-
-            return validNeigbour;
         }
 
         private static int GetFreeTilePosition(List<ITile> tiles)

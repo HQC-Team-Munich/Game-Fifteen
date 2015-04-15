@@ -7,13 +7,14 @@
     using Interfaces;
     using Constants;
     using Models;
+    using Utils;
 
     public class Engine
     {
-        private static List<ITile> tiles;
-        private static int movesCount;
-        private static State gameState;
-        private static bool isGameFinished;
+        private List<ITile> tiles;
+        private int movesCount;
+        private State gameState;
+        private bool isGameFinished;
 
         private static Engine instance = null;
 
@@ -29,32 +30,7 @@
             }
         }
 
-        private static void Menu()
-        {
-            tiles = new List<ITile>();
-            movesCount = 0;
-            gameState = State.Restart;
-            isGameFinished = false;
-
-            while (gameState != State.Exit)
-            {
-                if (!isGameFinished)
-                {
-                    ResolveGameState();
-
-                    Console.Write(Messages.MoveInput);
-                    string input = Console.ReadLine();
-
-                    ProceedMove(input);
-                }
-                else
-                {
-                    ProceedGameOver();
-                }
-            }
-        }
-
-        private static void ResolveGameState()
+        private void ResolveGameState()
         {
             switch (gameState)
             {
@@ -72,7 +48,7 @@
             }
         }
 
-        private static void ProceedGameOver()
+        private void ProceedGameOver()
         {
             if (movesCount == 0)
             {
@@ -83,7 +59,7 @@
                 Console.WriteLine(Messages.Win, movesCount);
                 Console.Write(Messages.HighScore);
 
-                var playerName = Console.ReadLine();
+                string playerName = Console.ReadLine();
                 IPlayer player = new Player(playerName, movesCount);
                 Scoreboard.AddPlayer(player);
                 Scoreboard.PrintScoreboard();
@@ -94,10 +70,10 @@
             movesCount = 0;
         }
 
-        private static void ProceedMove(string input)
+        private void ProceedMove(string input)
         {
             int destinationTileValue;
-            var isSuccessfulParsing = int.TryParse(input, out destinationTileValue);
+            bool isSuccessfulParsing = int.TryParse(input, out destinationTileValue);
 
             if (isSuccessfulParsing)
             {
@@ -126,7 +102,7 @@
             }
         }
 
-        private static List<ITile> RestartGame(List<ITile> tiles)
+        private List<ITile> RestartGame(List<ITile> tiles)
         {
             Console.WriteLine(Messages.Welcome);
             tiles = MatrixGenerator.GenerateMatrix();
@@ -134,12 +110,33 @@
             isGameFinished = Gameplay.IsMatrixSolved(tiles);
             Gameplay.PrintMatrix(tiles);
             gameState = State.InGame;
+
             return tiles;
         }
 
         public void Run()
         {
-            Menu();
+            tiles = new List<ITile>();
+            movesCount = 0;
+            gameState = State.Restart;
+            isGameFinished = false;
+
+            while (gameState != State.Exit)
+            {
+                if (!isGameFinished)
+                {
+                    ResolveGameState();
+
+                    Console.Write(Messages.MoveInput);
+                    string input = Console.ReadLine();
+
+                    ProceedMove(input);
+                }
+                else
+                {
+                    ProceedGameOver();
+                }
+            }
         }
     }
 }

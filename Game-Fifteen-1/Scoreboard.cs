@@ -28,6 +28,7 @@
 
         private static void DeleteAllExceptTopPlayers()
         {
+            //Can be implemented with linq or lambdas
             for (var index = 0; index < Players.Count(); index++)
             {
                 if (index > 4)

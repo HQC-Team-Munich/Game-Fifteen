@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using Enumerations;
     using Interfaces;
+    using Constants;
     using Models;
-
 
     public class Engine
     {
@@ -13,6 +13,20 @@
         private static int movesCount;
         private static State gameState;
         private static bool isGameFinished;
+
+        private static Engine instance = null;
+
+        public Engine()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                throw new Exception("You can only have one instance of this class.");
+            }
+        }
 
         private static void Menu()
         {
@@ -122,7 +136,7 @@
             return tiles;
         }
 
-        static void Main()
+        public void Run()
         {
             Menu();
         }

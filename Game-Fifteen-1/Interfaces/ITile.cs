@@ -4,8 +4,7 @@
 
     public interface ITile : IComparable
     {
-        int Position
-        { get;  set; }
+        int Position { get;  set; }
         string Label { get; }
     }
 }

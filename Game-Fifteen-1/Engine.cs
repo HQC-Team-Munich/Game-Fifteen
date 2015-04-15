@@ -41,7 +41,7 @@
                 {
                     ResolveGameState();
 
-                    Console.Write(Messages.MOVEINPUT);
+                    Console.Write(Messages.MoveInput);
                     string input = Console.ReadLine();
 
                     ProceedMove(input);
@@ -75,12 +75,12 @@
         {
             if (movesCount == 0)
             {
-                Console.WriteLine(Messages.LOSE);
+                Console.WriteLine(Messages.Lose);
             }
             else
             {
-                Console.WriteLine(Messages.WIN, movesCount);
-                Console.Write(Messages.HIGHSCORE);
+                Console.WriteLine(Messages.Win, movesCount);
+                Console.Write(Messages.HighScore);
 
                 var playerName = Console.ReadLine();
                 IPlayer player = new Player(playerName, movesCount);
@@ -127,7 +127,7 @@
 
         private static List<ITile> RestartGame(List<ITile> tiles)
         {
-            Console.WriteLine(Messages.WELCOME);
+            Console.WriteLine(Messages.Welcome);
             tiles = MatrixGenerator.GenerateMatrix();
             tiles = MatrixGenerator.ShuffleMatrix(tiles);
             isGameFinished = Gameplay.IsMatrixSolved(tiles);

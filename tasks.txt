@@ -1,0 +1,21 @@
+Tasks:
+
+Fix the TODO marked areas: --
+
+Make the engine singleton and remove the main method from it --
+
+Move the Messages class in another namespace (Not enumerations) --
+
+Refactor the gameplay class --
+
+refactor the matrix generator class --
+
+Correctly implement exception handling - quickben
+
+Make unit tests for Tile and Player - quickben
+
+Make unit tests for engine --
+
+Make unit tests for gameplay --
+
+Make unit tests for matrix generator --

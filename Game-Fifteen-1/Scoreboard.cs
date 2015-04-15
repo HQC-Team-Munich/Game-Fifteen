@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using Interfaces;
-    using Models;
 
     public static class Scoreboard
     {
@@ -20,6 +19,7 @@
         public static void PrintScoreboard()
         {
             Console.WriteLine("Scoreboard:");
+            // TODO: Fix
             foreach (var scoreboardLine in Players.Select(player => (Players.IndexOf(player) + 1).ToString() + ". " + player.Name + " --> " + player.Moves.ToString() + " moves"))
             {
                 Console.WriteLine(scoreboardLine);

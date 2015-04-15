@@ -100,6 +100,7 @@
         {
             var tilesDistance = freeTile.Position - tile.Position;
             var tilesAbsoluteDistance = Math.Abs(tilesDistance);
+            // TODO: Fix
             var isValidHorizontalNeighbour =
                 ((tilesAbsoluteDistance == HORIZONTAL_NEIGHBOUR_TILE) && !(((tile.Position + 1) % MATRIX_SIZE == 1 && tilesDistance == -1) || ((tile.Position + 1) % MATRIX_SIZE == 0 && tilesDistance == 1)));
             var isValidVerticalNeighbour = (tilesAbsoluteDistance == VERTICAL_NEIGHBOUR_TILE);

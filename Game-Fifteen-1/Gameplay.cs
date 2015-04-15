@@ -21,9 +21,10 @@
             Console.Write(LeftPipe);
 
             int rowCounter = 0;
+
             for (int index = 0; index < 16; index++)
             {
-                var currentElement = sourceMatrix.ElementAt(index);
+                ITile currentElement = sourceMatrix.ElementAt(index);
                 
                 if (currentElement.Label == string.Empty)
                 {
@@ -39,18 +40,17 @@
                 }
 
                 rowCounter++;
-                if (rowCounter != 4)
-                {
-                    continue;
-                }
 
-                Console.WriteLine(RightPipe);
-                if (index < 12)
+                if (rowCounter == 4)
                 {
-                    Console.Write(LeftPipe);
-                }
+                    Console.WriteLine(RightPipe);
+                    if (index < 12)
+                    {
+                        Console.Write(LeftPipe);
+                    }
 
-                rowCounter = 0;
+                    rowCounter = 0;
+                }
             }
 
             Console.WriteLine(Line);
@@ -63,15 +63,15 @@
                 throw new ArgumentException("Invalid move!");
             }
 
-            var resultMatrix = tiles;
-            var freeTile = tiles[GetFreeTilePosition(tiles)];
-            var tile = tiles[GetDestinationTilePosition(tiles, tileValue)];
+            List<ITile> resultMatrix = tiles;
+            ITile freeTile = tiles[GetFreeTilePosition(tiles)];
+            ITile tile = tiles[GetDestinationTilePosition(tiles, tileValue)];
 
-            var areValidNeighbourTiles = TilePositionValidation(tiles, freeTile, tile);
+            bool areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
 
             if (areValidNeighbourTiles)
             {
-                var targetTilePosition = tile.Position;
+                int targetTilePosition = tile.Position;
                 resultMatrix[targetTilePosition].Position = freeTile.Position;
                 resultMatrix[freeTile.Position].Position = targetTilePosition;
                 resultMatrix.Sort();
@@ -86,11 +86,13 @@
 
         public static bool IsMatrixSolved(List<ITile> tiles)
         {
-            var count = 0;
-            foreach (var tile in tiles)
+            int count = 0;
+
+            foreach (ITile tile in tiles)
             {
-                var tileLabelInt = 0;
-                int.TryParse(tile.Label,out tileLabelInt);
+                int tileLabelInt = 0;
+                int.TryParse(tile.Label, out tileLabelInt);
+
                 if (tileLabelInt == (tile.Position + 1))
                 {
                     count++;
@@ -102,11 +104,13 @@
 
         private static int GetDestinationTilePosition(List<ITile> tiles, int tileValue)
         {
-            var result = 0;
-            for (var index = 0; index < tiles.Count; index++)
+            int result = 0;
+
+            for (int index = 0; index < tiles.Count; index++)
             {
                 var parsedLabel = 0;
                 var successfulParsing = int.TryParse(tiles[index].Label, out parsedLabel);
+
                 if (successfulParsing && tileValue == parsedLabel)
                 {
                     result = index;
@@ -116,30 +120,26 @@
             return result;
         }
 
-        private static bool TilePositionValidation(List<ITile> tiles, ITile freeTile, ITile tile)
-        {
-            var areValidNeighbourTiles = AreValidNeighbourTiles(freeTile, tile);
-
-            return areValidNeighbourTiles;
-        }
-
         private static bool AreValidNeighbourTiles(ITile freeTile, ITile tile)
         {
-            var tilesDistance = freeTile.Position - tile.Position;
-            var tilesAbsoluteDistance = Math.Abs(tilesDistance);
+            int tilesDistance = freeTile.Position - tile.Position;
+            int tilesAbsoluteDistance = Math.Abs(tilesDistance);
             // TODO: Fix
-            var isValidHorizontalNeighbour =
-                (tilesAbsoluteDistance == Matrix.HorizontalNeighbourTile && !(((tile.Position + 1) % Matrix.MatrixSize == 1 && tilesDistance == -1) || ((tile.Position + 1) % Matrix.MatrixSize == 0 && tilesDistance == 1)));
-            var isValidVerticalNeighbour = (tilesAbsoluteDistance == Matrix.VerticalNeighbourTile);
-            var validNeigbour = isValidHorizontalNeighbour || isValidVerticalNeighbour;
+            bool isValidHorizontalNeighbour =
+                (tilesAbsoluteDistance == Matrix.HorizontalNeighbourTile && 
+                !(((tile.Position + 1) % Matrix.MatrixSize == 1 && tilesDistance == -1) 
+                || ((tile.Position + 1) % Matrix.MatrixSize == 0 && tilesDistance == 1)));
+            bool isValidVerticalNeighbour = (tilesAbsoluteDistance == Matrix.VerticalNeighbourTile);
+            bool validNeigbour = isValidHorizontalNeighbour || isValidVerticalNeighbour;
 
             return validNeigbour;
         }
 
         private static int GetFreeTilePosition(List<ITile> tiles)
         {
-            var result = 0;
-            for (var index = 0; index < tiles.Count; index++)
+            int result = 0;
+
+            for (int index = 0; index < tiles.Count; index++)
             {
                 if (tiles[index].Label == string.Empty)
                 {

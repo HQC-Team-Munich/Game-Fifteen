@@ -103,7 +103,9 @@
             var tilesAbsoluteDistance = Math.Abs(tilesDistance);
             // TODO: Fix
             var isValidHorizontalNeighbour =
-                ((tilesAbsoluteDistance == Matrix.HorizontalNeighbourTile) && !(((tile.Position + 1) % Matrix.MatrixSize == 1 && tilesDistance == -1) || ((tile.Position + 1) % Matrix.MatrixSize == 0 && tilesDistance == 1)));
+                ((tilesAbsoluteDistance == Matrix.HorizontalNeighbourTile)
+                && !(((tile.Position + 1) % Matrix.MatrixSize == 1 && tilesDistance == -1) 
+                || ((tile.Position + 1) % Matrix.MatrixSize == 0 && tilesDistance == 1)));
             var isValidVerticalNeighbour = (tilesAbsoluteDistance == Matrix.VerticalNeighbourTile);
             var validNeigbour = isValidHorizontalNeighbour || isValidVerticalNeighbour;
 

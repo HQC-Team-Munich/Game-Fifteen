@@ -18,15 +18,16 @@
         private State gameState;
         private bool isGameFinished;
 
-        public Engine()
+        public static Engine Instance
         {
-            if (instance == null)
+            get
             {
-                instance = this;
-            }
-            else
-            {
-                throw new Exception("You can only have one instance of this class.");
+                if (instance == null)
+                {
+                    instance = new Engine();
+                }
+
+                return instance;
             }
         }
 

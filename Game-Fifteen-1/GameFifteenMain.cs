@@ -4,7 +4,7 @@
     {
         public static void Main()
         {
-            Engine gameFifteenEngine = new Engine();
+            Engine gameFifteenEngine = Engine.Instance;
 
             gameFifteenEngine.Run();
         }

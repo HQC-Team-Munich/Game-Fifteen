@@ -22,7 +22,10 @@
             Console.WriteLine("Scoreboard:");
             foreach (IPlayer player in players)
             {
-                string scoreboardLine = (players.IndexOf(player) + 1) + ". " + player.Name + " --> " + player.Moves + " moves";
+                string scoreboardLine = (players.IndexOf(player) + 1) +
+                    ". " + player.Name + " --> " +
+                    player.Moves + " moves";
+
                 Console.WriteLine(scoreboardLine);
             }
         }

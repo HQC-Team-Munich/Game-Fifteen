@@ -72,7 +72,7 @@
         #endregion
 
         #region Methods
-        public int CompareTo(object player) ////todo implement equals and use it here, and ovveride the toString()
+        public int CompareTo(object player)
         {
             var currentPlayer = (Player) player;
             var result = this.Moves.CompareTo(currentPlayer.Moves);

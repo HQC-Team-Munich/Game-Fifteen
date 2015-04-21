@@ -37,14 +37,16 @@
 
         public static List<ITile> ShuffleMatrix(List<ITile> startingMatrix)
         {
+            List<ITile> currentMatrix = CloneMatrix(startingMatrix);
+
             int cycleCount = Random.Next(MinimumCycles, MaximumCycles);
            
             for (int index = 0; index < cycleCount; index++)
             {
-                startingMatrix = MoveFreeTile(startingMatrix);
+                currentMatrix = MoveFreeTile(currentMatrix);
             }
 
-            return startingMatrix;
+            return currentMatrix;
         }
 
         public static bool AreValidNeighbourTiles(ITile freeTile, ITile tile)
@@ -60,18 +62,20 @@
 
         private static List<ITile> MoveFreeTile(List<ITile> resultMatrix)
         {
+            List<ITile> currentMatrix = CloneMatrix(resultMatrix);
             ITile freeTile = DetermineFreeTile(resultMatrix);
             
             int switchedIndexNumber = Random.Next() % resultMatrix.Count();
             ITile targetTile = resultMatrix[switchedIndexNumber];
 
             int targetTilePosition = targetTile.Position;
-            resultMatrix[targetTile.Position].Position = freeTile.Position;
-            resultMatrix[freeTile.Position].Position = targetTilePosition;
 
-            resultMatrix.Sort();
+            currentMatrix[targetTile.Position].Position = freeTile.Position;
+            currentMatrix[freeTile.Position].Position = targetTilePosition;
 
-            return resultMatrix;
+            currentMatrix.Sort();
+
+            return currentMatrix;
         }
 
         private static ITile DetermineFreeTile(IEnumerable<ITile> resultMatrix)
@@ -88,6 +92,18 @@
 
             return freeTile;
         }
+
+        private static List<ITile> CloneMatrix(List<ITile> matrix)
+        {
+            List<ITile> clonedMatrix = new List<ITile>();
+            for (int index = 0; index < matrix.Count; index++)
+            {
+                ITile tile = new Tile(matrix[index].Label, matrix[index].Position);
+                clonedMatrix.Add(tile);
+            }
+
+            return clonedMatrix;
+        } 
 
         //This method is not used anywhere! Find usages if you can.
         #region Find usage if you can.

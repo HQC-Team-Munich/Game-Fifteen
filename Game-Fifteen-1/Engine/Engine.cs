@@ -17,7 +17,6 @@
         private int movesCount;
         private State gameState;
         private bool isGameFinished;
-        public Random random = new Random();
 
         public static Engine Instance
         {
@@ -44,11 +43,6 @@
                 if (!isGameFinished)
                 {
                     ResolveGameState();
-
-                    Console.Write(Messages.MoveInput);
-                    string input = Console.ReadLine();
-
-                    ProceedMove(input);
                 }
                 else
                 {
@@ -67,6 +61,11 @@
 
                 case State.InGame:
                     isGameFinished = Gameplay.IsMatrixSolved(tiles);
+
+                    Console.Write(Messages.MoveInput);
+                    string input = Console.ReadLine();
+
+                    ProceedMove(input);
                     break;
 
                 case State.Top:

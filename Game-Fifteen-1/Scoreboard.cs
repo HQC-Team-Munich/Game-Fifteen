@@ -16,6 +16,7 @@ namespace GameFifteen
 
         public static void AddPlayer(IPlayer player)
         {
+            LoadData();
             players.Add(player);
             players = players.OrderBy(p => p.Moves).ToList();
             DeleteAllExceptTopPlayers();

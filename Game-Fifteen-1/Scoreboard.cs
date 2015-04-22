@@ -1,4 +1,8 @@
-﻿namespace GameFifteen
+﻿using System.IO;
+using System.Text.RegularExpressions;
+using GameFifteen.Models;
+
+namespace GameFifteen
 {
     using System;
     using System.Collections.Generic;
@@ -13,12 +17,14 @@
         public static void AddPlayer(IPlayer player)
         {
             players.Add(player);
-            players.Sort();
+            players = players.OrderBy(p => p.Moves).ToList();
             DeleteAllExceptTopPlayers();
         }
 
         public static void PrintScoreboard()
         {
+            LoadData();
+
             Console.WriteLine("Scoreboard:");
             foreach (IPlayer player in players)
             {
@@ -27,6 +33,45 @@
                     player.Moves + " moves";
 
                 Console.WriteLine(scoreboardLine);
+            }
+        }
+
+        private static void LoadData()
+        {
+            if (players.Count == 0)
+            {
+                using (StreamReader reader = new StreamReader("scoreboard.txt"))
+                {
+                    Regex regex = new Regex(@"\d+\.\s+(.+)\s+-->\s+(\d+).+");
+
+                    string current = reader.ReadLine();
+
+                    while (current != null)
+                    {
+                        Match match = regex.Match(current);
+                        current = reader.ReadLine();
+
+                        players.Add(new Player(match.Groups[1].Value, Int32.Parse(match.Groups[2].Value)));
+                    }
+                }
+
+                players = players.OrderBy(player => player.Moves).ToList();
+                DeleteAllExceptTopPlayers();
+            }
+        }
+
+        public static void Save()
+        {
+            using (StreamWriter writer = new StreamWriter("scoreboard.txt"))
+            {
+                players.ForEach(player =>
+                {
+                    string scoreboardLine = (players.IndexOf(player) + 1) +
+                       ". " + player.Name + " --> " +
+                       player.Moves + " moves";
+
+                    writer.WriteLine(scoreboardLine);
+                });
             }
         }
 

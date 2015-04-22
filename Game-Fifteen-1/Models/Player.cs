@@ -34,8 +34,8 @@
 
             private set
             {
-                if (value.All(char.IsLetter))
-                {
+                //if (value.All(char.IsLetter))
+                //{
                     if (!String.IsNullOrWhiteSpace(value))
                     {
                         this.name = value;
@@ -45,11 +45,11 @@
                         throw new InvalidPlayerNameException("The player name can not be empty.");
                     }
                 }
-                else
-                {
-                    throw new InvalidPlayerNameException("The name of the player should consist of only letters.");
-                }
-            }
+                //else
+               // {
+               //     throw new InvalidPlayerNameException("The name of the player should consist of only letters.");
+               // }
+            //}
         }
 
         public int Moves

@@ -17,6 +17,7 @@
         private int movesCount;
         private State gameState;
         private bool isGameFinished;
+        public Random random = new Random();
 
         public static Engine Instance
         {
@@ -88,6 +89,7 @@
                 string playerName = Console.ReadLine();
                 IPlayer player = new Player(playerName, movesCount);
                 Scoreboard.AddPlayer(player);
+                Scoreboard.Save();
                 Scoreboard.PrintScoreboard();
             }
 

@@ -82,7 +82,7 @@ namespace GameFifteen
 
         private static void DeleteAllExceptTopPlayers()
         {
-            players = players.Take(4).ToList();
+            players = players.Take(5).ToList();
         }
     }
 }

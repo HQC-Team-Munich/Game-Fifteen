@@ -71,6 +71,7 @@
 
                 case State.Top:
                     Scoreboard.PrintScoreboard();
+                    gameState = State.InGame;
                     break;
             }
         }

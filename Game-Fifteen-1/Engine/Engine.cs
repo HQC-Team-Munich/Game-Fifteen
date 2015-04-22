@@ -17,7 +17,6 @@
         private int movesCount;
         private State gameState;
         private bool isGameFinished;
-        public Random random = new Random();
 
         public static Engine Instance
         {

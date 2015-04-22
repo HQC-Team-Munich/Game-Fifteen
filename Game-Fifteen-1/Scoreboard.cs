@@ -40,6 +40,11 @@ namespace GameFifteen
         {
             if (players.Count == 0)
             {
+                if (!File.Exists("scoreboard.txt"))
+                {
+                    File.Create("scoreboard.txt");
+                }
+
                 using (StreamReader reader = new StreamReader("scoreboard.txt"))
                 {
                     Regex regex = new Regex(@"\d+\.\s+(.+)\s+-->\s+(\d+).+");

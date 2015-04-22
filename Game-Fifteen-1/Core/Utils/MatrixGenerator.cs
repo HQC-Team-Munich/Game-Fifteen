@@ -1,4 +1,4 @@
-﻿namespace GameFifteen.Utils
+﻿namespace GameFifteen.Core.Utils
 {
     using System;
     using System.Collections.Generic;

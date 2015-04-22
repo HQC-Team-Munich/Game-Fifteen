@@ -4,7 +4,7 @@
     using Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Models;
-    using Utils;
+    using Core;
 
     [TestClass]
     public class MatrixGeneratorTests

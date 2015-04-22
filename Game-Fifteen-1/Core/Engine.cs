@@ -1,4 +1,4 @@
-﻿namespace GameFifteen
+﻿namespace GameFifteen.Core
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,9 @@
     using Enumerations;
     using Interfaces;
     using Constants;
+
+    using GameFifteen.Core.Utils;
     using Models;
-    using Utils;
 
     public class Engine
     {
@@ -33,69 +34,69 @@
 
         public void Run()
         {
-            tiles = new List<ITile>();
-            movesCount = 0;
-            gameState = State.Restart;
-            isGameFinished = false;
+            this.tiles = new List<ITile>();
+            this.movesCount = 0;
+            this.gameState = State.Restart;
+            this.isGameFinished = false;
 
-            while (gameState != State.Exit)
+            while (this.gameState != State.Exit)
             {
-                if (!isGameFinished)
+                if (!this.isGameFinished)
                 {
-                    ResolveGameState();
+                    this.ResolveGameState();
                 }
                 else
                 {
-                    ProceedGameOver();
+                    this.ProceedGameOver();
                 }
             }
         }
 
         private void ResolveGameState()
         {
-            switch (gameState)
+            switch (this.gameState)
             {
                 case State.Restart:
-                    RestartGame();
+                    this.RestartGame();
                     break;
 
                 case State.InGame:
-                    isGameFinished = Gameplay.IsMatrixSolved(tiles);
+                    this.isGameFinished = Gameplay.IsMatrixSolved(this.tiles);
 
                     Console.Write(Messages.MoveInput);
                     string input = Console.ReadLine();
 
-                    ProceedMove(input);
+                    this.ProceedMove(input);
                     break;
 
                 case State.Top:
                     Scoreboard.PrintScoreboard();
-                    gameState = State.InGame;
+                    this.gameState = State.InGame;
                     break;
             }
         }
 
         private void ProceedGameOver()
         {
-            if (movesCount == 0)
+            if (this.movesCount == 0)
             {
                 Console.WriteLine(Messages.Lose);
             }
             else
             {
-                Console.WriteLine(Messages.Win, movesCount);
+                Console.WriteLine(Messages.Win, this.movesCount);
                 Console.Write(Messages.HighScore);
 
                 string playerName = Console.ReadLine();
-                IPlayer player = new Player(playerName, movesCount);
+                IPlayer player = new Player(playerName, this.movesCount);
                 Scoreboard.AddPlayer(player);
                 Scoreboard.Save();
                 Scoreboard.PrintScoreboard();
             }
 
-            gameState = State.Restart;
-            isGameFinished = false;
-            movesCount = 0;
+            this.gameState = State.Restart;
+            this.isGameFinished = false;
+            this.movesCount = 0;
         }
 
         private void ProceedMove(string input)
@@ -107,10 +108,10 @@
             {
                 try
                 {
-                    Gameplay.MoveTiles(tiles, destinationTileValue);
-                    movesCount++;
-                    Gameplay.PrintMatrix(tiles);
-                    isGameFinished = Gameplay.IsMatrixSolved(tiles);
+                    Gameplay.MoveTiles(this.tiles, destinationTileValue);
+                    this.movesCount++;
+                    Gameplay.PrintMatrix(this.tiles);
+                    this.isGameFinished = Gameplay.IsMatrixSolved(this.tiles);
                 }
                 catch (Exception exception) // bad practice Need to be more explicit
                 {
@@ -121,7 +122,7 @@
             {
                 try
                 {
-                    gameState = Command.CommandType(input);
+                    this.gameState = Command.CommandType(input);
                 }
                 catch (ArgumentException exception)
                 {
@@ -133,11 +134,11 @@
         private void RestartGame()
         {
             Console.WriteLine(Messages.Welcome);
-            tiles = MatrixGenerator.GenerateMatrix();
-            tiles = MatrixGenerator.ShuffleMatrix(tiles);
-            isGameFinished = Gameplay.IsMatrixSolved(tiles);
-            Gameplay.PrintMatrix(tiles);
-            gameState = State.InGame;
+            this.tiles = MatrixGenerator.GenerateMatrix();
+            this.tiles = MatrixGenerator.ShuffleMatrix(this.tiles);
+            this.isGameFinished = Gameplay.IsMatrixSolved(this.tiles);
+            Gameplay.PrintMatrix(this.tiles);
+            this.gameState = State.InGame;
         }
     }
 }

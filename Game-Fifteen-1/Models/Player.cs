@@ -1,10 +1,9 @@
 ﻿namespace GameFifteen.Models
 {
     using System;
-    using System.Linq;
 
-    using Exceptions.PlayerExceptions;
-    using Interfaces;
+    using GameFifteen.Exceptions.PlayerExceptions;
+    using GameFifteen.Interfaces;
 
     public class Player : IPlayer
     {

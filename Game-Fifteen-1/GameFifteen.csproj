@@ -58,9 +58,9 @@
     <Compile Include="Gameplay.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\ITile.cs" />
-    <Compile Include="Engine\Utils\MatrixGenerator.cs" />
+    <Compile Include="Core\Utils\MatrixGenerator.cs" />
     <Compile Include="Models\Player.cs" />
-    <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Core\Engine.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="Models\Tile.cs" />
   </ItemGroup>

@@ -4,9 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Interfaces;
+    using Constants;
     using Core.Utils;
-    using GameFifteen.Exceptions.TileExceptions;
+    using Exceptions.TileExceptions;
+    using Interfaces;
 
     public static class Gameplay
     {
@@ -66,7 +67,7 @@
         {
             if (tileValue < 0 || tileValue > 15)
             {
-                throw new TilePositionOutOfRangeException("Invalid move! Valid moves range is [0-15]");
+                throw new TilePositionOutOfRangeException(Messages.TileOutOfRangeExceptionMessage);
             }
 
             List<ITile> resultMatrix = tiles;
@@ -75,17 +76,15 @@
 
             bool areValidNeighbourTiles = MatrixGenerator.AreValidNeighbourTiles(freeTile, tile);
 
-            if (areValidNeighbourTiles)
+            if (!areValidNeighbourTiles)
             {
-                int targetTilePosition = tile.Position;
-                resultMatrix[targetTilePosition].Position = freeTile.Position;
-                resultMatrix[freeTile.Position].Position = targetTilePosition;
-                resultMatrix.Sort();
+                throw new InvalidTileNeighbourException(Messages.InvalidTileNeighbourExceptionMessage);
             }
-            else
-            {
-                throw new InvalidTileNeighbourException("Invalid move! Please choose a valid neighbour.");
-            }
+
+            int targetTilePosition = tile.Position;
+            resultMatrix[targetTilePosition].Position = freeTile.Position;
+            resultMatrix[freeTile.Position].Position = targetTilePosition;
+            resultMatrix.Sort();
 
             return resultMatrix;
         }

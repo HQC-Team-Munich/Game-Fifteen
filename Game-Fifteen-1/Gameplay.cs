@@ -6,6 +6,7 @@
 
     using Interfaces;
     using Core.Utils;
+    using GameFifteen.Exceptions.TileExceptions;
 
     public static class Gameplay
     {
@@ -56,11 +57,16 @@
             Console.WriteLine(Line);
         }
 
+        /// <summary>
+        /// This method is moving the tiles.
+        /// </summary>
+        /// <exception cref="TilePositionOutOfRangeException"></exception>
+        /// <exception cref="InvalidTileNeighbourException"></exception>
         public static List<ITile> MoveTiles(List<ITile> tiles, int tileValue)
         {
             if (tileValue < 0 || tileValue > 15)
             {
-                throw new ArgumentException("Invalid move!");
+                throw new TilePositionOutOfRangeException("Invalid move! Valid moves range is [0-15]");
             }
 
             List<ITile> resultMatrix = tiles;
@@ -78,7 +84,7 @@
             }
             else
             {
-                throw new Exception("Invalid move!");
+                throw new InvalidTileNeighbourException("Invalid move! Please choose a valid neighbour.");
             }
 
             return resultMatrix;

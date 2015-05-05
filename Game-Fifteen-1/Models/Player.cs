@@ -33,22 +33,15 @@
 
             private set
             {
-                //if (value.All(char.IsLetter))
-                //{
-                    if (!String.IsNullOrWhiteSpace(value))
-                    {
-                        this.name = value;
-                    }
-                    else
-                    {
-                        throw new InvalidPlayerNameException("The player name can not be empty.");
-                    }
+                if (!String.IsNullOrWhiteSpace(value))
+                {
+                    this.name = value;
                 }
-                //else
-               // {
-               //     throw new InvalidPlayerNameException("The name of the player should consist of only letters.");
-               // }
-            //}
+                else
+                {
+                    throw new InvalidPlayerNameException("The player name can not be empty.");
+                }
+            }
         }
 
         public int Moves
@@ -62,7 +55,7 @@
             {
                 if (value < 0)
                 {
-                    throw new InvalidPlayerMovesException("The moves count can not be a negative number.");
+                    throw new InvalidPlayerMoveCountException("The moves count can not be a negative number.");
                 }
 
                 this.moves = value;

@@ -48,12 +48,14 @@
     <Compile Include="Enumerations\State.cs" />
     <Compile Include="Constants\Messages.cs" />
     <Compile Include="Exceptions\GameException.cs" />
-    <Compile Include="Exceptions\PlayerExceptions\InvalidPlayerMovesException.cs" />
+    <Compile Include="Exceptions\PlayerExceptions\InvalidPlayerMoveCountException.cs" />
     <Compile Include="Exceptions\PlayerExceptions\InvalidPlayerNameException.cs" />
     <Compile Include="Exceptions\PlayerExceptions\PlayerException.cs" />
     <Compile Include="Exceptions\TileExceptions\InvalidTileLabelException.cs" />
+    <Compile Include="Exceptions\TileExceptions\InvalidTileNeighbourException.cs" />
     <Compile Include="Exceptions\TileExceptions\InvalidTilePositionException.cs" />
     <Compile Include="Exceptions\TileExceptions\TileException.cs" />
+    <Compile Include="Exceptions\TileExceptions\TilePositionOutOfRangeException.cs" />
     <Compile Include="GameFifteenMain.cs" />
     <Compile Include="Gameplay.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />

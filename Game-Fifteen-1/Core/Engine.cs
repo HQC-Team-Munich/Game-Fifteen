@@ -9,6 +9,7 @@
 
     using GameFifteen.Core.Utils;
     using Models;
+    using GameFifteen.Exceptions.TileExceptions;
 
     public class Engine
     {
@@ -113,7 +114,7 @@
                     Gameplay.PrintMatrix(this.tiles);
                     this.isGameFinished = Gameplay.IsMatrixSolved(this.tiles);
                 }
-                catch (Exception exception) // bad practice Need to be more explicit
+                catch (InvalidTilePositionException exception)
                 {
                     Console.WriteLine(exception.Message);
                 }

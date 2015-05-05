@@ -8,7 +8,7 @@
     public class PlayerTests
     {
         [TestMethod]
-        [ExpectedException(typeof(InvalidPlayerMovesException))]
+        [ExpectedException(typeof(InvalidPlayerMoveCountException))]
         public void NegativeMovesTest()
         {
             Player player = new Player("Gosho", -5);

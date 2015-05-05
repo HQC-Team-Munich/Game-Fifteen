@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using Constants;
     using Interfaces;
     using Models;
-    using Constants;
-
+    
     public static class MatrixGenerator
     {
         private const int MinimumCycles = 20;

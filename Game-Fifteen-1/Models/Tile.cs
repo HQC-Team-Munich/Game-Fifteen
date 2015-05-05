@@ -2,6 +2,7 @@
 {
     using System.Linq;
 
+    using Constants;
     using Exceptions.TileExceptions;
     using Interfaces;
 
@@ -34,7 +35,7 @@
             {
                 if (!value.All(char.IsLetterOrDigit))
                 {
-                    throw new InvalidTileLabelException("The tile label should consist of only letters and digits.");
+                    throw new InvalidTileLabelException(Messages.InvalidTileLabelExceptionMessage);
                 }
 
                 this.label = value;
@@ -52,7 +53,7 @@
             {
                 if (value < 0)
                 {
-                    throw new InvalidTilePositionException("The position of the title can not be a negative number.");
+                    throw new InvalidTilePositionException(Messages.InvalidTilePositionExceptionMessage);
                 }
 
                 this.position = value;

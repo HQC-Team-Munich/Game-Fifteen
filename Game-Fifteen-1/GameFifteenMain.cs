@@ -1,6 +1,6 @@
 ﻿namespace GameFifteen
 {
-    using GameFifteen.Core;
+    using Core;
 
     public class GameFifteenMain
     {

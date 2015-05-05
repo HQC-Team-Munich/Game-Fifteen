@@ -21,5 +21,13 @@
         public const string CommandIsNullExceptionMessage = "Invalid Command! Input can't be null.";
 
         public const string InvalidCommandExceptionMessage = "Invalid Command!\nYour input was not recognized as a valid command.";
+
+        public const string InvalidPlayerNameExceptionMessage = "The player name can not be empty.";
+
+        public const string InvalidPlayerMoveCountExceptionMessage = "The moves count can not be a negative number.";
+
+        public const string InvalidTileLabelExceptionMessage = "The tile label should consist of only letters and digits.";
+
+        public const string InvalidTilePositionExceptionMessage = "The position of the title can not be a negative number.";
     }
 }

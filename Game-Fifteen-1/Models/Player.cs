@@ -2,6 +2,7 @@
 {
     using System;
 
+    using Constants;
     using GameFifteen.Exceptions.PlayerExceptions;
     using GameFifteen.Interfaces;
 
@@ -39,7 +40,7 @@
                 }
                 else
                 {
-                    throw new InvalidPlayerNameException("The player name can not be empty.");
+                    throw new InvalidPlayerNameException(Messages.InvalidPlayerNameExceptionMessage);
                 }
             }
         }
@@ -55,7 +56,7 @@
             {
                 if (value < 0)
                 {
-                    throw new InvalidPlayerMoveCountException("The moves count can not be a negative number.");
+                    throw new InvalidPlayerMoveCountException(Messages.InvalidPlayerMoveCountExceptionMessage);
                 }
 
                 this.moves = value;

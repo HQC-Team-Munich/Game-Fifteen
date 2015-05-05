@@ -47,6 +47,8 @@
     <Compile Include="Constants\Matrix.cs" />
     <Compile Include="Enumerations\State.cs" />
     <Compile Include="Constants\Messages.cs" />
+    <Compile Include="Exceptions\CommandExceptions\CommandIsNullException.cs" />
+    <Compile Include="Exceptions\CommandExceptions\InvalidCommandException.cs" />
     <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="Exceptions\PlayerExceptions\InvalidPlayerMoveCountException.cs" />
     <Compile Include="Exceptions\PlayerExceptions\InvalidPlayerNameException.cs" />

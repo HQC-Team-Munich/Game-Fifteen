@@ -4,7 +4,7 @@
     using System.Runtime.Serialization;
 
     [Serializable]
-    public abstract class TileException : GameException
+    public class TileException : GameException
     {
         /// <summary>
         /// Main Tile Exception Class

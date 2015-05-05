@@ -17,5 +17,9 @@
         public const string TileOutOfRangeExceptionMessage = "Invalid move! Valid moves range is [0-15]";
 
         public const string InvalidTileNeighbourExceptionMessage = "Invalid move! Please choose a valid neighbour!";
+
+        public const string CommandIsNullExceptionMessage = "Invalid Command! Input can't be null.";
+
+        public const string InvalidCommandExceptionMessage = "Invalid Command!\nYour input was not recognized as a valid command.";
     }
 }

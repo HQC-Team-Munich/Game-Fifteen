@@ -4,7 +4,7 @@
     using System.Runtime.Serialization;
 
     [Serializable]
-    public abstract class PlayerException : GameException
+    public class PlayerException : GameException
     {
         /// <summary>
         /// Main Player Exception Class

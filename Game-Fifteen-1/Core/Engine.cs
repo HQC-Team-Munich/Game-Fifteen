@@ -7,9 +7,10 @@
     using Interfaces;
     using Constants;
 
-    using GameFifteen.Core.Utils;
+    using Core.Utils;
     using Models;
-    using GameFifteen.Exceptions.TileExceptions;
+    using Exceptions.TileExceptions;
+    using Exceptions.CommandExceptions;
 
     public class Engine
     {
@@ -125,7 +126,7 @@
                 {
                     this.gameState = Command.CommandType(input);
                 }
-                catch (ArgumentException exception)
+                catch (InvalidCommandException exception)
                 {
                     Console.WriteLine(exception.Message);
                 }

@@ -8,7 +8,6 @@
     {
         /// <summary>
         /// Invalid Tile Neighbour Exception Class
-        /// This Exception is thrown if the tile is not a valid neighbour
         /// </summary>
         public InvalidTileNeighbourException()
             : base()

@@ -7,7 +7,7 @@
     public class InvalidPlayerMoveCountException : PlayerException
     {
         /// <summary>
-        /// Invalid Player Move Count Exception Class
+        /// Invalid Player Move Count Exception Class.
         /// </summary>
         public InvalidPlayerMoveCountException() : base()
         {

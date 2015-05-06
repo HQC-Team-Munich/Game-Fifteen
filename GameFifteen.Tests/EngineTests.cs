@@ -1,5 +1,6 @@
 ﻿namespace GameFifteen.Tests
 {
+    using Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

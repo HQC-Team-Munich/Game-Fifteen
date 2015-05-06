@@ -13,6 +13,10 @@
     {
         private static List<IPlayer> players = new List<IPlayer>();
 
+        /// <summary>
+        /// Adds a new player to the game
+        /// </summary>
+        /// <param name="player">The player object to be added</param>
         public static void AddPlayer(IPlayer player)
         {
             LoadData();
@@ -21,6 +25,9 @@
             DeleteAllExceptTopPlayers();
         }
 
+        /// <summary>
+        /// Prints the scoreboard of the game in a friendly format.
+        /// </summary>
         public static void PrintScoreboard()
         {
             LoadData();

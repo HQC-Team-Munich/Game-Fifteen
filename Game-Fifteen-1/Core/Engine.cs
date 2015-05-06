@@ -20,6 +20,10 @@
         private State gameState;
         private bool isGameFinished;
 
+        /// <summary>
+        /// The starting point of the game. 
+        /// Triggers the further execution of the game and its components.
+        /// </summary>
         public static Engine Instance
         {
             get

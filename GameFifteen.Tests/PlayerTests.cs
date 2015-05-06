@@ -20,12 +20,5 @@
         {
             Player player = new Player("", 5);
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidPlayerNameException))]
-        public void InvalidNameTest()
-        {
-            Player player = new Player("%@#%^", 5);
-        }
     }
 }

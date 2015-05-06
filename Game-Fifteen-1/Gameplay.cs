@@ -11,6 +11,10 @@
 
     public static class Gameplay
     {
+        /// <summary>
+        /// Prints the given matrix in a friendly format on the console.
+        /// </summary>
+        /// <param name="sourceMatrix">The matrix to be printed</param>
         public static void PrintMatrix(List<ITile> sourceMatrix)
         {
             const string Line = "  -------------";
@@ -59,10 +63,14 @@
         }
 
         /// <summary>
-        /// This method is moving the tiles.
+        /// This method is handling the movement of the tiles in-game.
         /// </summary>
-        /// <exception cref="TilePositionOutOfRangeException"></exception>
-        /// <exception cref="InvalidTileNeighbourException"></exception>
+        /// <exception cref="TilePositionOutOfRangeException">
+        /// Thrown when the position of the tile is a negative number or exceeds the scope of the matrix
+        /// </exception>
+        /// <exception cref="InvalidTileNeighbourException">
+        /// Thrown when two given tiles are not valid neighbours.
+        /// </exception>
         public static List<ITile> MoveTiles(List<ITile> tiles, int tileValue)
         {
             if (tileValue < 0 || tileValue > 15)
@@ -89,6 +97,11 @@
             return resultMatrix;
         }
 
+        /// <summary>
+        /// Checks whether the matrix is solved and every tile is in the right position.
+        /// </summary>
+        /// <param name="tiles">The tiles of the matrix</param>
+        /// <returns></returns>
         public static bool IsMatrixSolved(List<ITile> tiles)
         {
             int count = 0;

@@ -10,8 +10,8 @@
         /// <summary>
         /// This method is processing the commands entered by the user.
         /// </summary>
-        /// <exception cref="InvalidCommandException"></exception>
-        /// <exception cref="CommandIsNullException"></exception>
+        /// <exception cref="InvalidCommandException">Thrown when the input command is not valid</exception>
+        /// <exception cref="CommandIsNullException">Thrown when the input command is a null value</exception>
         public static State CommandType(string input)
         {
             if(input == null)

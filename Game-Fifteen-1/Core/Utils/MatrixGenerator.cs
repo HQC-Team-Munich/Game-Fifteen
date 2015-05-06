@@ -14,6 +14,10 @@
         private const int MaximumCycles = 50;
         private static readonly Random Random = new Random();
 
+        /// <summary>
+        /// Generates a new game matrix to be used in-game.
+        /// </summary>
+        /// <returns>A List of ITiles which represents the generated matrix</returns>
         public static List<ITile> GenerateMatrix()
         {
             List<ITile> tiles = new List<ITile>();
@@ -35,6 +39,11 @@
             return tiles;
         }
 
+        /// <summary>
+        /// Randomizes the positions of the tiles in the input matrix.
+        /// </summary>
+        /// <param name="startingMatrix">The input matrix to be shuffled</param>
+        /// <returns>The shuffled matrix</returns>
         public static List<ITile> ShuffleMatrix(List<ITile> startingMatrix)
         {
             List<ITile> currentMatrix = CloneMatrix(startingMatrix);
@@ -49,6 +58,12 @@
             return currentMatrix;
         }
 
+        /// <summary>
+        /// Checks whether two given tiles are valid neighbours in the game.
+        /// </summary>
+        /// <param name="freeTile">The input tile which has no value as it is unoccupied</param>
+        /// <param name="tile">The tile to check</param>
+        /// <returns>A boolean statement determining whether the input tiles are valid neighbours</returns>
         public static bool AreValidNeighbourTiles(ITile freeTile, ITile tile)
         {
             int tilesAbsoluteDistance = Math.Abs(freeTile.Position - tile.Position);

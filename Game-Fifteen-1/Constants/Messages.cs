@@ -13,7 +13,7 @@
 
         public const string HighScore = "Please enter your name for the top scoreboard: ";
 
-        /* exceptions messages */
+        /* exception messages */
         public const string TileOutOfRangeExceptionMessage = "Invalid move! Valid moves range is [0-15]";
 
         public const string InvalidTileNeighbourExceptionMessage = "Invalid move! Please choose a valid neighbour!";

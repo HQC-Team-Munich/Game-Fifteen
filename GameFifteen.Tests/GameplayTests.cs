@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Exceptions.TileExceptions;
     using Interfaces;
     using Models;
 
@@ -50,6 +51,22 @@
                 Assert.AreEqual(tiles[index].Label, tilesAfterMoving[index].Label);
                 Assert.AreEqual(tiles[index].Position, tilesAfterMoving[index].Position);
             }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TilePositionOutOfRangeException))]
+        public void MoveTileTest_NegativeTilePositionTest()
+        {
+            List<ITile> tiles = new List<ITile>();
+            Gameplay.MoveTiles(tiles, -1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TilePositionOutOfRangeException))]
+        public void MoveTileTest_OutOfUpperLimitTilePostionTest()
+        {
+            List<ITile> tiles = new List<ITile>();
+            Gameplay.MoveTiles(tiles, 16);
         }
     }
 }
